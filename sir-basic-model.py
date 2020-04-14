@@ -29,7 +29,7 @@ def SIR_model(N,S0,I0,R0,beta,gamma,ts):
     # Integrate the SIR equations over the time grid, t.
     return odeint(SIR_derivatives, y0, ts, args=(N, beta, gamma))
 
-# The following 
+# Change the following values to execute the model for a specific scenario
 N = 1000 #Total population
 I0 = 1 # Initial number of infected people
 R0 = 0 # Initial number of recovered people
