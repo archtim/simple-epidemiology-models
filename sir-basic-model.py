@@ -9,10 +9,10 @@ import matplotlib.pyplot as plt
 # It is only called by the SIR_model function - not intended to be called directly
 def SIR_derivatives(y, t, N, beta, gamma):
     S, I, R = y
-    dSdt = -beta * S * I / N
-    dIdt = beta * S * I / N - gamma * I
-    dRdt = gamma * I
-    return dSdt, dIdt, dRdt
+    dS = -beta * S * I / N
+    dI = beta * S * I / N - gamma * I
+    dR = gamma * I
+    return dS, dI, dR
 
 # This function is intended to be called to execute the SIR model
 # S0: Initial number of susceptible people
