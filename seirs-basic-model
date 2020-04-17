@@ -10,11 +10,11 @@ from scipy.integrate import odeint
 # It is only called by the SIR_model function - not intended to be called directly
 def SEIRS_derivatives(y, t, N, beta, gamma, sigma):
     S, E, I, R = y
-    dSdt = -beta * S * I / N
-    dEdt = (beta * S * I / N) - sigma * E
-    dIdt = (sigma * E) - (gamma * I)
-    dRdt = gamma * I
-    return dSdt, dEdt, dIdt, dRdt
+    dS = -beta * S * I / N
+    dE = (beta * S * I / N) - sigma * E
+    dI = (sigma * E) - (gamma * I)
+    dR = gamma * I
+    return dS, dE, dI, dR
 
 # This function is intended to be called to execute the SEIRS model
 # N: Total population
@@ -29,14 +29,14 @@ def SEIRS_derivatives(y, t, N, beta, gamma, sigma):
 # returns: Returns 4 arrays of len(ts), i.e. one series each for susceptible, exposed, infected and recovered people
 def SEIRS_model(N,I0,E0,R0,beta,gamma,sigma,ts):
     S0 = N - I0 - R0 - E0
-    y0 = S0, I0, R0, E0
+    y0 = S0, E0, I0, R0
     return odeint(SEIRS_derivatives, y0, ts, args=(N, beta, gamma, sigma))
     
 # Change the following values to execute the model for a specific scenario
 N = 100000 #Total population
-I0 = 100 # Initial number of infected people
-R0 = 20 # Initial number of recovered people
-E0 = 0 # Initial number of exposed people
+I0 = 0 # Initial number of infected people
+R0 = 0 # Initial number of recovered people
+E0 = 100 # Initial number of exposed people
 beta = 0.24 # Average number of contacts per person per time multiplied by the probability of disease transmission
 gamma = 0.11 # Rate of recovery or mortality
 sigma = 0.4 # Rate that people who have recovered become susceptible again due to loss of immunity
